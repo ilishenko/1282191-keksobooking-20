@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Евгений Илишенко](https://up.htmlacademy.ru/javascript/20/user/1282191).
-* Наставник: `Неизвестно`.
+* Наставник: [Максим Кузнецов](https://htmlacademy.ru/profile/maxkuznetsov).
 
 ---
 
