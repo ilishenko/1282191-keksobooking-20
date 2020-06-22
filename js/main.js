@@ -24,46 +24,73 @@ var getNumber = function () {
   return number;
 };
 
-// var randomNumber = function () {
-//  var elementRandom = Math.floor(Math.random() * 1000);
-//  return elementRandom;
-// };
+var getRandomNumber = function () {
+  var elementRandom = Math.floor(Math.random() * 1000);
+  return elementRandom;
+};
 
-var randomNumberRange = function (min, max) {
+var getRandomNumberRange = function (min, max) {
   var elementRandom = Math.floor(Math.random() * (max - min)) + min;
   return elementRandom;
 };
 
-var randomElement = function (array) {
+var getRandomElement = function (array) {
   var elementRandom = array[Math.floor(Math.random() * array.length)];
   return elementRandom;
 };
 
-var getHouse = function (typeHouse, quantityRooms, quantityGuests, checkin, checkout, features, photosHotel) {
+var getHouse = function () {
   var house = {};
-  house.avatar = 'img/avatars/user' + '0' + getNumber() + '.png';
+  if (number <= 9) {
+    house.avatar = 'img/avatars/user' + '0' + getNumber() + '.png';
+  } else {
+    house.avatar = 'img/avatars/user' + getNumber() + '.png';
+  };
+
   house.title = 'Это дом лучше предыдущего';
   house.address = '600, 350';
-  house.price = randomElement();
-  house.type = randomElement(typeHouse);
-  house.rooms = randomElement(quantityRooms);
-  house.guests = randomElement(quantityGuests);
-  house.checkin = randomElement(checkin);
-  house.checkout = randomElement(checkout);
-  house.features = randomElement(features);
+  house.price = getRandomNumber();
+  house.type = getRandomElement(TYPE_HOUSE);
+  house.rooms = getRandomElement(QUANTITY_ROOMS);
+  house.guests = getRandomElement(QUANTITY_GUESTS);
+  house.checkin = getRandomElement(CHECKIN);
+  house.checkout = getRandomElement(CHECKOUT);
+  house.features = getRandomElement(FEATURES);
   house.description = '';
-  house.photos = randomElement(photosHotel);
-  house.location.x = randomNumberRange(130, (window).width());
-  house.location.y = randomNumberRange(130, 630);
+  house.photos = getRandomElement(PHOTOS_HOTEL);
+  house.location.x = getRandomNumberRange(0, 1200);
+  house.location.y = getRandomNumberRange(130, 630);
 
   return house;
 };
-var getHouseElement = function () {
-  var house = getHouse(TYPE_HOUSE, QUANTITY_ROOMS, QUANTITY_GUESTS, CHECKIN, CHECKOUT, FEATURES, PHOTOS_HOTEL);
-  return house;
-};
+
+var house = getHouse();
 
 var getMapPins = function () {
+
+  var mapPins = mapPinsTemplate.cloneNode(true);
+
+  mapPins.querySelector('.map__pin').src = house.avatar;
+  mapPins.querySelector('.map__pin').style.left = house.location.x + 'px';
+  mapPins.querySelector('.map__pin').style.top = house.location.y + 'px';
+
+
+  return mapPins;
+};
+
+var houseElement = getMapPins();
+
+mapPinsElement.appendChild(houseElement);
+/*
+var getHouseElement = function () {
+  var house = getHouse();
+  return house;
+};
+
+
+
+var getMapPins = function () {
+
   var mapPins = mapPinsTemplate.cloneNode(true);
 
   mapPins.querySelector('.map__pin').src = getHouseElement().avatar;
@@ -79,3 +106,4 @@ for (var i = 0; i < QUANTITY_HOTEL; i++) {
   fragment.appendChild(getMapPins());
 }
 mapPinsElement.appendChild(fragment);
+*/
