@@ -80,20 +80,21 @@ var getHouse = function () {
   };
 };
 
-var getHouseFun = function () {
+var getHouseElement = function () {
   var house = getHouse();
 
   return house;
 };
 
 
-var getHousePin = function () {
 
+var getHousePin = function () {
+  var house = getHouseElement();
   var mapPins = mapPinsTemplate.cloneNode(true);
 
-  mapPins.querySelector('img').src = getHouseFun().author.avatar;
-  mapPins.style.left = getHouseFun().location.x + 'px';
-  mapPins.style.top = getHouseFun().location.y + 'px';
+  mapPins.querySelector('img').src = house.author.avatar;
+  mapPins.style.left = house.location.x + 'px';
+  mapPins.style.top = house.location.y + 'px';
 
 
   return mapPins;
