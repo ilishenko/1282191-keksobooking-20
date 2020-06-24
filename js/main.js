@@ -86,8 +86,6 @@ var getHouseElement = function () {
   return house;
 };
 
-
-
 var getHousePin = function () {
   var house = getHouseElement();
   var mapPins = mapPinsTemplate.cloneNode(true);
