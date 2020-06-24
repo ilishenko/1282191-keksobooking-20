@@ -10,17 +10,19 @@ var PHOTOS_HOTEL = [
   'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
 ];
-// var QUANTITY_HOTEL = 8;
+var QUANTITY_HOTEL = 8;
 
 var map = document.querySelector('.map');
 map.classList.remove('map--faded');
 
 var mapPinsElement = map.querySelector('.map__pins');
-var mapPinsTemplate = document.querySelector('#pin');
+var mapPinsTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
 var number = 0;
 var getNumber = function () {
+
   number += 1;
+
   return number;
 };
 
@@ -41,7 +43,7 @@ var getRandomElement = function (array) {
 
 var getAutorAvatarSrc = function () {
   var autorAvatarSrc = '';
-  if (number <= 9) {
+  if (number < 9) {
     autorAvatarSrc = 'img/avatars/user' + '0' + getNumber() + '.png';
   } else {
     autorAvatarSrc = 'img/avatars/user' + getNumber() + '.png';
@@ -51,74 +53,55 @@ var getAutorAvatarSrc = function () {
 };
 
 var getHouse = function () {
-  // var house = {};
 
   return {
-    house: {
-      'author': {
-        avatar: getAutorAvatarSrc()
-      },
+    'author': {
+      avatar: getAutorAvatarSrc()
+    },
 
-      'offer': {
-        'title': 'Это дом лучше предыдущего',
-        'address': '600, 350',
-        'price': getRandomNumber(),
-        'type': getRandomElement(TYPE_HOUSE),
-        'rooms': getRandomElement(QUANTITY_ROOMS),
-        'guests': getRandomElement(QUANTITY_GUESTS),
-        'checkin': getRandomElement(CHECKIN),
-        'checkout': getRandomElement(CHECKOUT),
-        'features': getRandomElement(FEATURES),
-        'description': '',
-        'photos': getRandomElement(PHOTOS_HOTEL)
-      },
+    'offer': {
+      'title': 'Это дом лучше предыдущего',
+      'address': '600, 350',
+      'price': getRandomNumber(),
+      'type': getRandomElement(TYPE_HOUSE),
+      'rooms': getRandomElement(QUANTITY_ROOMS),
+      'guests': getRandomElement(QUANTITY_GUESTS),
+      'checkin': getRandomElement(CHECKIN),
+      'checkout': getRandomElement(CHECKOUT),
+      'features': getRandomElement(FEATURES),
+      'description': '',
+      'photos': getRandomElement(PHOTOS_HOTEL)
+    },
 
-      'location': {
-        'x': getRandomNumberRange(0, 1200),
-        'y': getRandomNumberRange(130, 630)
-      }
+    'location': {
+      'x': getRandomNumberRange(0, 1200),
+      'y': getRandomNumberRange(130, 630)
     }
   };
 };
 
-var house = getHouse();
+var getHouseFun = function () {
+  var house = getHouse();
+
+  return house;
+};
+
 
 var getHousePin = function () {
 
   var mapPins = mapPinsTemplate.cloneNode(true);
 
-  mapPins.querySelector('.map__pin').src = house.author.avatar;
-  mapPins.querySelector('.map__pin').style.left = house.location.x + 'px';
-  mapPins.querySelector('.map__pin').style.top = house.location.y + 'px';
+  mapPins.querySelector('img').src = getHouseFun().author.avatar;
+  mapPins.style.left = getHouseFun().location.x + 'px';
+  mapPins.style.top = getHouseFun().location.y + 'px';
 
 
   return mapPins;
 };
 
-var houseElement = getHousePin();
-
-mapPinsElement.appendChild(houseElement);
-/*
-var getHouseElement = function () {
-  var house = getHouse();
-  return house;
-};
-
-var getMapPins = function () {
-
-  var mapPins = mapPinsTemplate.cloneNode(true);
-
-  mapPins.querySelector('.map__pin').src = getHouseElement().avatar;
-  mapPins.querySelector('.map__pin').style.left = getHouseElement().location.x + 'px';
-  mapPins.querySelector('.map__pin').style.top = getHouseElement().location.y + 'px';
-
-
-  return mapPins;
-};
 
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < QUANTITY_HOTEL; i++) {
-  fragment.appendChild(getMapPins());
+  fragment.appendChild(getHousePin());
 }
 mapPinsElement.appendChild(fragment);
-*/
