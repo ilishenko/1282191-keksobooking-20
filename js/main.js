@@ -13,7 +13,6 @@ var PHOTOS_HOTEL = [
 var QUANTITY_HOTEL = 8;
 
 var map = document.querySelector('.map');
-map.classList.remove('map--faded');
 
 var mapPinsElement = map.querySelector('.map__pins');
 var mapPinsTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
@@ -104,3 +103,86 @@ for (var i = 0; i < QUANTITY_HOTEL; i++) {
   fragment.appendChild(getHousePin());
 }
 mapPinsElement.appendChild(fragment);
+
+// Модуль 4
+var formFilters = document.querySelector('.map__filters');
+var formFiltersSelects = formFilters.querySelectorAll('.map__filter');
+var formFiltersFildsetInputs = formFilters.querySelectorAll('input[type="checkbox"]');
+
+var formNewHouse = document.querySelector('.ad-form');
+var formNewHouseAvatarMap = formNewHouse.querySelector('.ad-form-header');
+var formNewHouseAvatarMapInput = formNewHouseAvatarMap.querySelector('input');
+var formNewHouseElements = formNewHouse.querySelectorAll('.ad-form__element');
+var mapPinsElementStart = mapPinsElement.querySelector('.map__pin--main');
+var formNewHouseDelete = formNewHouse.querySelector('.ad-form__reset');
+var formNewHouseInputText = formNewHouse.querySelectorAll('input[type="text"]');
+var formNewHouseTextarea = formNewHouse.querySelector('textarea');
+
+var getInactivePage = function () {
+  map.classList.add('map--faded');
+  formFiltersSelects.forEach(function(formFiltersSelect) {
+    formFiltersSelect.disabled = true;
+  });
+
+  formFiltersFildsetInputs.forEach(function(formFiltersFildsetInput) {
+    formFiltersFildsetInput.disabled = true;
+  });
+
+  formNewHouse.classList.add('ad-form--disabled');
+  formNewHouseAvatarMapInput.disabled = true;
+
+  formNewHouseElements.forEach(function(formNewHouseElement) {
+    formNewHouseElement.disabled = true;
+  });
+  formNewHouseInputText.forEach(function(formNewHouseInputText) {
+    formNewHouseInputText.value = '';
+  });
+  formNewHouseTextarea.value = '';
+};
+
+getInactivePage();
+
+var getActivePage = function () {
+  map.classList.remove('map--faded');
+  formFiltersSelects.forEach(function(formFiltersSelect) {
+    formFiltersSelect.disabled = false;
+  });
+  formFiltersFildsetInputs.forEach(function (formFiltersFildsetInput) {
+    formFiltersFildsetInput.disabled = false;
+  });
+
+  formNewHouse.classList.remove('ad-form--disabled');
+  formNewHouseAvatarMapInput.disabled = false;
+  formNewHouseElements.forEach(function (formNewHouseElement) {
+    formNewHouseElement.disabled = false;
+  });
+};
+
+mapPinsElementStart.addEventListener('mousedown', function () {
+  if (evt.which === 1) {
+    getActivePage();
+  };
+});
+
+mapPinsElementStart.addEventListener('mousemove', function (evt) {
+  var mouseX = evt.pageX;
+  var mouseY = evt.pageY;
+  mapPinsElementStart.style.left = mouseX - 78 + 'px';
+  mapPinsElementStart.style.top = mouseY - 78 + 'px';
+});
+
+mapPinsElementStart.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    getActivePage();
+  };
+});
+
+formNewHouseDelete.addEventListener('click', function () {
+  getInactivePage();
+});
+
+formNewHouseDelete.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    getInactivePage();
+  };
+});
