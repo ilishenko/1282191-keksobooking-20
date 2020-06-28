@@ -115,36 +115,39 @@ var formNewHouseAvatarMapInput = formNewHouseAvatarMap.querySelector('input');
 var formNewHouseElements = formNewHouse.querySelectorAll('.ad-form__element');
 var mapPinsElementStart = mapPinsElement.querySelector('.map__pin--main');
 var formNewHouseDelete = formNewHouse.querySelector('.ad-form__reset');
-var formNewHouseInputText = formNewHouse.querySelectorAll('input[type="text"]');
+var formNewHouseInputTextes = formNewHouse.querySelectorAll('input[type="text"]');
 var formNewHouseTextarea = formNewHouse.querySelector('textarea');
 
 var getInactivePage = function () {
   map.classList.add('map--faded');
-  formFiltersSelects.forEach(function(formFiltersSelect) {
+  formFiltersSelects.forEach(function (formFiltersSelect) {
     formFiltersSelect.disabled = true;
   });
 
-  formFiltersFildsetInputs.forEach(function(formFiltersFildsetInput) {
+  formFiltersFildsetInputs.forEach(function (formFiltersFildsetInput) {
     formFiltersFildsetInput.disabled = true;
   });
 
   formNewHouse.classList.add('ad-form--disabled');
   formNewHouseAvatarMapInput.disabled = true;
 
-  formNewHouseElements.forEach(function(formNewHouseElement) {
+  formNewHouseElements.forEach(function (formNewHouseElement) {
     formNewHouseElement.disabled = true;
   });
-  formNewHouseInputText.forEach(function(formNewHouseInputText) {
+  formNewHouseInputTextes.forEach(function (formNewHouseInputText) {
     formNewHouseInputText.value = '';
   });
   formNewHouseTextarea.value = '';
+
+  mapPinsElementStart.style.left = 570 + 'px';
+  mapPinsElementStart.style.top = 375 + 'px';
 };
 
 getInactivePage();
 
 var getActivePage = function () {
   map.classList.remove('map--faded');
-  formFiltersSelects.forEach(function(formFiltersSelect) {
+  formFiltersSelects.forEach(function (formFiltersSelect) {
     formFiltersSelect.disabled = false;
   });
   formFiltersFildsetInputs.forEach(function (formFiltersFildsetInput) {
@@ -158,10 +161,10 @@ var getActivePage = function () {
   });
 };
 
-mapPinsElementStart.addEventListener('mousedown', function () {
+mapPinsElementStart.addEventListener('mousedown', function (evt) {
   if (evt.which === 1) {
     getActivePage();
-  };
+  }
 });
 
 mapPinsElementStart.addEventListener('mousemove', function (evt) {
@@ -174,7 +177,7 @@ mapPinsElementStart.addEventListener('mousemove', function (evt) {
 mapPinsElementStart.addEventListener('keydown', function (evt) {
   if (evt.key === 'Enter') {
     getActivePage();
-  };
+  }
 });
 
 formNewHouseDelete.addEventListener('click', function () {
@@ -184,5 +187,5 @@ formNewHouseDelete.addEventListener('click', function () {
 formNewHouseDelete.addEventListener('keydown', function (evt) {
   if (evt.key === 'Enter') {
     getInactivePage();
-  };
+  }
 });
