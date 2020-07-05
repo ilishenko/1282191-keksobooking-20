@@ -162,18 +162,56 @@ var getActivePage = function () {
 };
 
 mapPinsElementStart.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
   if (evt.which === 1) {
     getActivePage();
+    /*
+    var startCoords = {
+      x: evt.clientX,
+      y: evt.clientY
+    };
+*/
+    var onMouseMove = function (moveEvt) {
+      moveEvt.preventDefault();
+      /*
+      startCoords = {
+        x: moveEvt.clientX,
+        y: moveEvt.clientY
+      };
+console.log('two: ' + startCoords.x);
+console.log(startCoords.y);
+
+      var shift = {
+        x: startCoords.x - moveEvt.clientX,
+        y: startCoords.y - moveEvt.clientY
+      };
+console.log('thre: ' + shift.x);
+console.log(shift.y);
+*/
+      mapPinsElementStart.style.top = (moveEvt.clientY + 130) + 'px';
+      mapPinsElementStart.style.left = (moveEvt.clientX - 60) + 'px';
+      getAddress();
+    };
+
+    var onMouseUp = function (upEvt) {
+      upEvt.preventDefault();
+
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
   }
 });
-
+/*
 mapPinsElementStart.addEventListener('mousemove', function (evt) {
   var mouseX = evt.pageX;
   var mouseY = evt.pageY;
   mapPinsElementStart.style.left = mouseX - 78 + 'px';
   mapPinsElementStart.style.top = mouseY - 78 + 'px';
 });
-
+*/
 mapPinsElementStart.addEventListener('keydown', function (evt) {
   if (evt.key === 'Enter') {
     getActivePage();
@@ -189,3 +227,114 @@ formNewHouseDelete.addEventListener('keydown', function (evt) {
     getInactivePage();
   }
 });
+
+// Валидация
+
+var titleAd = formNewHouse.querySelector('#title');
+
+titleAd.addEventListener('invalid', function () {
+  if (titleAd.validity.valueMissing) {
+    titleAd.setCustomValidity('Обязательное поле');
+  } else {
+    titleAd.setCustomValidity('');
+  }
+});
+
+titleAd.addEventListener('input', function () {
+  var valueLength = titleAd.value.length;
+
+  if (valueLength < 30) {
+    titleAd.setCustomValidity('Ещё ' + (30 - valueLength) + ' симв.');
+    titleAd.style.borderColor = 'red';
+    titleAd.style.outlineColor = 'red';
+  } else if (valueLength > 100) {
+    titleAd.setCustomValidity('Удалите лишние ' + (valueLength - 100) + ' симв.');
+    titleAd.style.borderColor = 'red';
+  } else {
+    titleAd.setCustomValidity('');
+    titleAd.style.borderColor = 'green';
+    titleAd.style.outlineColor = 'green';
+  }
+});
+
+var address = formNewHouse.querySelector('#address');
+
+var getAddress = function (evt) {
+  if (mapPinsElementStart.style.left === '570px' && mapPinsElementStart.style.top === '375px') {
+    address.value = '570 + 78, 375 + 156';
+  } else {
+    address.value = evt.clientX + '78, ' + evt.clientY + '156';
+  }
+
+};
+getAddress();
+
+var typeHouse = formNewHouse.querySelector('#type');
+var price = formNewHouse.querySelector('#price');
+
+var filterPrice = function () {
+  if (typeHouse.value === 'bungalo') {
+    price.setAttribute('min', '0');
+    price.setAttribute('placeholder', '0');
+  } else if (typeHouse.value === 'flat') {
+    price.setAttribute('min', '1000');
+    price.setAttribute('placeholder', '1000');
+  } else if (typeHouse.value === 'house') {
+    price.setAttribute('min', '5000');
+    price.setAttribute('placeholder', '5000');
+  } else if (typeHouse.value === 'palace') {
+    price.setAttribute('min', '10000');
+    price.setAttribute('placeholder', '10000');
+  }
+};
+
+typeHouse.addEventListener('change', filterPrice);
+
+var timeIn = formNewHouse.querySelector('#timein');
+var timeOut = formNewHouse.querySelector('#timeout');
+
+var timeChange = function () {
+  if (timeIn.value === '12:00' || timeOut.value === '12:00') {
+    timeIn.value = '12:00';
+    timeOut.value = '12:00';
+  } else if (timeIn.value === '13:00' || timeOut.value === '13:00') {
+    timeIn.value = '13:00';
+    timeOut.value = '13:00';
+
+  } else if (timeIn.value === '14:00' || timeOut.value === '14:00') {
+    timeIn.value = '14:00';
+    timeOut.value = '14:00';
+  }
+};
+
+timeIn.addEventListener('change', timeChange);
+timeOut.addEventListener('change', timeChange);
+
+var roomNumber = formNewHouse.querySelector('#room_number');
+var capacity = formNewHouse.querySelector('#capacity');
+
+var filterRooms = function () {
+  if (roomNumber.value === '1') {
+    capacity[0].disabled = true;
+    capacity[1].disabled = true;
+    capacity[2].disabled = false;
+    capacity[3].disabled = true;
+  } else if (roomNumber.value === '2') {
+    capacity[0].disabled = true;
+    capacity[1].disabled = false;
+    capacity[2].disabled = false;
+    capacity[3].disabled = true;
+  } else if (roomNumber.value === '3') {
+    capacity[0].disabled = false;
+    capacity[1].disabled = false;
+    capacity[2].disabled = false;
+    capacity[3].disabled = true;
+  } else if (roomNumber.value === '100') {
+    capacity[0].disabled = true;
+    capacity[1].disabled = true;
+    capacity[2].disabled = true;
+    capacity[3].disabled = false;
+  }
+};
+
+roomNumber.addEventListener('change', filterRooms);
