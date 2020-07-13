@@ -293,17 +293,25 @@ typeHouse.addEventListener('change', filterPrice);
 var timeIn = formNewHouse.querySelector('#timein');
 var timeOut = formNewHouse.querySelector('#timeout');
 
-var timeChange = function () {
-  if (timeIn.value === '12:00' || timeOut.value === '12:00') {
-    timeIn.value = '12:00';
-    timeOut.value = '12:00';
-  } else if (timeIn.value === '13:00' || timeOut.value === '13:00') {
-    timeIn.value = '13:00';
-    timeOut.value = '13:00';
+var controlTime = {
+  TWELVE: '12:00',
+  THIRTEEN: '13:00',
+  FOURTEEN: '14:00'
+};
 
-  } else if (timeIn.value === '14:00' || timeOut.value === '14:00') {
-    timeIn.value = '14:00';
-    timeOut.value = '14:00';
+var timeChange = function () {
+  if (timeIn.value === controlTime.TWELVE || timeOut.value === controlTime.TWELVE) {
+    timeIn.options[0].selected = true;
+    timeOut.options[0].selected = true;
+  } else if (timeIn.value === controlTime.THIRTEEN || timeOut.value === controlTime.THIRTEEN) {
+    timeIn.options[0].selected = false;
+    timeOut.options[0].selected = false;
+    timeIn.options[1].selected = true;
+    timeOut.options[1].selected = true;
+
+  } else if (timeIn.value === controlTime.FOURTEEN || timeOut.value === controlTime.FOURTEEN) {
+    timeIn.options[2].selected = true;
+    timeOut.options[2].selected = true;
   }
 };
 
@@ -315,25 +323,30 @@ var capacity = formNewHouse.querySelector('#capacity');
 
 var filterRooms = function () {
   if (roomNumber.value === '1') {
-    capacity[0].disabled = true;
-    capacity[1].disabled = true;
-    capacity[2].disabled = false;
-    capacity[3].disabled = true;
+    capacity.options[0].disabled = true;
+    capacity.options[1].disabled = true;
+    capacity.options[2].disabled = false;
+    capacity.options[3].disabled = true;
+    capacity.options[2].selected = true;
+    capacity.options[0].selected = false;
   } else if (roomNumber.value === '2') {
-    capacity[0].disabled = true;
-    capacity[1].disabled = false;
-    capacity[2].disabled = false;
-    capacity[3].disabled = true;
+    capacity.options[0].disabled = true;
+    capacity.options[1].disabled = false;
+    capacity.options[2].disabled = false;
+    capacity.options[3].disabled = true;
+    capacity.options[2].selected = true;
   } else if (roomNumber.value === '3') {
-    capacity[0].disabled = false;
-    capacity[1].disabled = false;
-    capacity[2].disabled = false;
-    capacity[3].disabled = true;
+    capacity.options[0].disabled = false;
+    capacity.options[1].disabled = false;
+    capacity.options[2].disabled = false;
+    capacity.options[3].disabled = true;
+    capacity.options[1].selected = true;
   } else if (roomNumber.value === '100') {
-    capacity[0].disabled = true;
-    capacity[1].disabled = true;
-    capacity[2].disabled = true;
-    capacity[3].disabled = false;
+    capacity.options[0].disabled = true;
+    capacity.options[1].disabled = true;
+    capacity.options[2].disabled = true;
+    capacity.options[3].disabled = false;
+    capacity.options[3].selected = true;
   }
 };
 
