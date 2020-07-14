@@ -263,9 +263,11 @@ var address = formNewHouse.querySelector('#address');
 
 var getAddress = function (evt) {
   if (mapPinsElementStart.style.left === '570px' && mapPinsElementStart.style.top === '375px') {
-    address.value = '570 + 78, 375 + 156';
+    address.value = '648, 531';
   } else {
-    address.value = evt.clientX + '78, ' + evt.clientY + '156';
+    var x = + (evt.clientX) + 78;
+    var y = + (evt.clientY) + 156;
+    address.value = x, y;
   }
 
 };
