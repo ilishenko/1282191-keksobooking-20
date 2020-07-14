@@ -102,7 +102,7 @@ var fragment = document.createDocumentFragment();
 for (var i = 0; i < QUANTITY_HOTEL; i++) {
   fragment.appendChild(getHousePin());
 }
-mapPinsElement.appendChild(fragment);
+
 
 // Модуль 4
 var formFilters = document.querySelector('.map__filters');
@@ -159,6 +159,8 @@ var getActivePage = function () {
   formNewHouseElements.forEach(function (formNewHouseElement) {
     formNewHouseElement.disabled = false;
   });
+
+  mapPinsElement.appendChild(fragment);
 };
 
 mapPinsElementStart.addEventListener('mousedown', function (evt) {
@@ -188,8 +190,8 @@ console.log(startCoords.y);
 console.log('thre: ' + shift.x);
 console.log(shift.y);
 */
-      mapPinsElementStart.style.top = (moveEvt.clientY + 130) + 'px';
-      mapPinsElementStart.style.left = (moveEvt.clientX - 60) + 'px';
+      mapPinsElementStart.style.top = + (moveEvt.clientY + 130) + 'px';
+      mapPinsElementStart.style.left = + (moveEvt.clientX - 60) + 'px';
       getAddress();
     };
 
@@ -299,24 +301,30 @@ var controlTime = {
   FOURTEEN: '14:00'
 };
 
-var timeChange = function () {
-  if (timeIn.value === controlTime.TWELVE || timeOut.value === controlTime.TWELVE) {
-    timeIn.options[0].selected = true;
-    timeOut.options[0].selected = true;
-  } else if (timeIn.value === controlTime.THIRTEEN || timeOut.value === controlTime.THIRTEEN) {
-    timeIn.options[0].selected = false;
-    timeOut.options[0].selected = false;
-    timeIn.options[1].selected = true;
-    timeOut.options[1].selected = true;
+var timeInChange = function () {
+  if (timeIn.value === controlTime.TWELVE) {
+    timeOut.selectedIndex = 0;
+  } else if (timeIn.value === controlTime.THIRTEEN) {
+    timeOut.selectedIndex = 1;
 
-  } else if (timeIn.value === controlTime.FOURTEEN || timeOut.value === controlTime.FOURTEEN) {
-    timeIn.options[2].selected = true;
-    timeOut.options[2].selected = true;
+  } else if (timeIn.value === controlTime.FOURTEEN) {
+    timeOut.selectedIndex = 2;
   }
 };
 
-timeIn.addEventListener('change', timeChange);
-timeOut.addEventListener('change', timeChange);
+var timeOutChange = function () {
+  if (timeOut.value === controlTime.TWELVE) {
+    timeIn.selectedIndex = 0;
+  } else if (timeOut.value === controlTime.THIRTEEN) {
+    timeIn.selectedIndex = 1;
+
+  } else if (timeOut.value === controlTime.FOURTEEN) {
+    timeIn.selectedIndex = 2;
+  }
+};
+
+timeIn.addEventListener('change', timeInChange);
+timeOut.addEventListener('change', timeOutChange);
 
 var roomNumber = formNewHouse.querySelector('#room_number');
 var capacity = formNewHouse.querySelector('#capacity');
