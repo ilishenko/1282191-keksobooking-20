@@ -190,9 +190,9 @@ console.log(startCoords.y);
 console.log('thre: ' + shift.x);
 console.log(shift.y);
 */
-      mapPinsElementStart.style.top = + (moveEvt.clientY + 130) + 'px';
-      mapPinsElementStart.style.left = + (moveEvt.clientX - 60) + 'px';
-      getAddress();
+      mapPinsElementStart.style.top = +(moveEvt.clientY + 130) + 'px';
+      mapPinsElementStart.style.left = +(moveEvt.clientX - 60) + 'px';
+      getAddress(moveEvt);
     };
 
     var onMouseUp = function (upEvt) {
@@ -265,9 +265,9 @@ var getAddress = function (evt) {
   if (mapPinsElementStart.style.left === '570px' && mapPinsElementStart.style.top === '375px') {
     address.value = '648, 531';
   } else {
-    var x = + (evt.clientX) + 78;
-    var y = + (evt.clientY) + 156;
-    address.value = x, y;
+    var x = +(evt.clientX) + 78;
+    var y = +(evt.clientY) + 156;
+    address.value = x + ', ' + y;
   }
 
 };
