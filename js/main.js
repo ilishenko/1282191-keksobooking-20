@@ -267,7 +267,7 @@ var getAddress = function (evt) {
   } else {
     var x = +(evt.clientX) + 78;
     var y = +(evt.clientY) + 156;
-    address.value = x + ', ' + y;
+      address.value = x + ', ' + y;
   }
 
 };
