@@ -1,13 +1,8 @@
 'use strict';
 
-
-
 var map = document.querySelector('.map');
 
 var mapPinsElement = map.querySelector('.map__pins');
-
-
-
 
 // Модуль 4
 var formFilters = document.querySelector('.map__filters');
@@ -53,7 +48,7 @@ getInactivePage();
 mapPinsElementStart.addEventListener('mousedown', function (evt) {
   evt.preventDefault();
   if (evt.which === 1) {
-    window.map.getActivePage();
+    window.maps.getActivePage();
     /*
     var startCoords = {
       x: evt.clientX,
@@ -103,17 +98,17 @@ mapPinsElementStart.addEventListener('mousemove', function (evt) {
 */
 mapPinsElementStart.addEventListener('keydown', function (evt) {
   if (evt.key === 'Enter') {
-    window.map.getActivePage();
+    window.maps.getActivePage();
   }
 });
 
 formNewHouseDelete.addEventListener('click', function () {
-  window.map.getInactivePage();
+  window.maps.getInactivePage();
 });
 
 formNewHouseDelete.addEventListener('keydown', function (evt) {
   if (evt.key === 'Enter') {
-    window.map.getInactivePage();
+    window.maps.getInactivePage();
   }
 });
 
