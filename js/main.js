@@ -1,15 +1,12 @@
 'use strict';
 
-var QUANTITY_HOTEL = 8;
+
 
 var map = document.querySelector('.map');
 
 var mapPinsElement = map.querySelector('.map__pins');
 
-var fragment = document.createDocumentFragment();
-for (var i = 0; i < QUANTITY_HOTEL; i++) {
-  fragment.appendChild(window.pin.getHousePin());
-}
+
 
 
 // Модуль 4
@@ -53,28 +50,10 @@ var getInactivePage = function () {
 
 getInactivePage();
 
-var getActivePage = function () {
-  map.classList.remove('map--faded');
-  formFiltersSelects.forEach(function (formFiltersSelect) {
-    formFiltersSelect.disabled = false;
-  });
-  formFiltersFildsetInputs.forEach(function (formFiltersFildsetInput) {
-    formFiltersFildsetInput.disabled = false;
-  });
-
-  formNewHouse.classList.remove('ad-form--disabled');
-  formNewHouseAvatarMapInput.disabled = false;
-  formNewHouseElements.forEach(function (formNewHouseElement) {
-    formNewHouseElement.disabled = false;
-  });
-
-  mapPinsElement.appendChild(fragment);
-};
-
 mapPinsElementStart.addEventListener('mousedown', function (evt) {
   evt.preventDefault();
   if (evt.which === 1) {
-    getActivePage();
+    window.map.getActivePage();
     /*
     var startCoords = {
       x: evt.clientX,
@@ -124,17 +103,17 @@ mapPinsElementStart.addEventListener('mousemove', function (evt) {
 */
 mapPinsElementStart.addEventListener('keydown', function (evt) {
   if (evt.key === 'Enter') {
-    getActivePage();
+    window.map.getActivePage();
   }
 });
 
 formNewHouseDelete.addEventListener('click', function () {
-  getInactivePage();
+  window.map.getInactivePage();
 });
 
 formNewHouseDelete.addEventListener('keydown', function (evt) {
   if (evt.key === 'Enter') {
-    getInactivePage();
+    window.map.getInactivePage();
   }
 });
 

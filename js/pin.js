@@ -12,14 +12,14 @@
 
     getHousePin: function () {
       var house = window.pin.getHouseElement();
-      var mapPins = mapPinsTemplate.cloneNode(true);
+      var housePin = mapPinsTemplate.cloneNode(true);
 
-      mapPins.querySelector('img').src = house.author.avatar;
-      mapPins.style.left = house.location.x + 'px';
-      mapPins.style.top = house.location.y + 'px';
+      housePin.querySelector('img').src = house.author.avatar;
+      housePin.style.left = house.location.x + 'px';
+      housePin.style.top = house.location.y + 'px';
 
 
-      return mapPins;
+      return housePin;
     }
 
   };
