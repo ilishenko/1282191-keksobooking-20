@@ -1,6 +1,11 @@
 'use strict';
 
 (function () {
+  var PIN_START_X = 570;
+  var PIN_START_Y = 375;
+  var PIN_WIDTH = 156;
+  var PIN_HEIGTH = 156;
+
   var map = document.querySelector('.map');
   var mapPinsElement = map.querySelector('.map__pins');
   var formNewHouse = document.querySelector('.ad-form');
@@ -36,11 +41,15 @@
   var address = formNewHouse.querySelector('#address');
 
   window.getAddress = function (evt) {
+    var x;
+    var y;
     if (mapPinsElementStart.style.left === '570px' && mapPinsElementStart.style.top === '375px') {
-      address.value = '648, 531';
+      x = PIN_START_X + PIN_WIDTH / 2;
+      y = PIN_START_Y + PIN_HEIGTH;
+      address.value = x + ', ' + y;
     } else {
-      var x = +(evt.clientX) + 78;
-      var y = +(evt.clientY) + 156;
+      x = +(evt.clientX) + PIN_WIDTH / 2;
+      y = +(evt.clientY) + PIN_HEIGTH;
       address.value = x + ', ' + y;
     }
 
@@ -50,20 +59,16 @@
   var typeHouse = formNewHouse.querySelector('#type');
   var price = formNewHouse.querySelector('#price');
 
+  var housePrise = {
+    bungalo: 0,
+    flat: 1000,
+    house: 5000,
+    palace: 10000
+  };
+
   var filterPrice = function () {
-    if (typeHouse.value === 'bungalo') {
-      price.setAttribute('min', '0');
-      price.setAttribute('placeholder', '0');
-    } else if (typeHouse.value === 'flat') {
-      price.setAttribute('min', '1000');
-      price.setAttribute('placeholder', '1000');
-    } else if (typeHouse.value === 'house') {
-      price.setAttribute('min', '5000');
-      price.setAttribute('placeholder', '5000');
-    } else if (typeHouse.value === 'palace') {
-      price.setAttribute('min', '10000');
-      price.setAttribute('placeholder', '10000');
-    }
+    price.min = housePrise[typeHouse.value];
+    price.setAttribute('placeholder', housePrise[typeHouse.value]);
   };
 
   typeHouse.addEventListener('change', filterPrice);
@@ -71,32 +76,14 @@
   var timeIn = formNewHouse.querySelector('#timein');
   var timeOut = formNewHouse.querySelector('#timeout');
 
-  var controlTime = {
-    TWELVE: '12:00',
-    THIRTEEN: '13:00',
-    FOURTEEN: '14:00'
-  };
-
   var timeInChange = function () {
-    if (timeIn.value === controlTime.TWELVE) {
-      timeOut.selectedIndex = 0;
-    } else if (timeIn.value === controlTime.THIRTEEN) {
-      timeOut.selectedIndex = 1;
-
-    } else if (timeIn.value === controlTime.FOURTEEN) {
-      timeOut.selectedIndex = 2;
-    }
+    var index = timeIn.selectedIndex;
+    timeOut.selectedIndex = index;
   };
 
   var timeOutChange = function () {
-    if (timeOut.value === controlTime.TWELVE) {
-      timeIn.selectedIndex = 0;
-    } else if (timeOut.value === controlTime.THIRTEEN) {
-      timeIn.selectedIndex = 1;
-
-    } else if (timeOut.value === controlTime.FOURTEEN) {
-      timeIn.selectedIndex = 2;
-    }
+    var index = timeOut.selectedIndex;
+    timeIn.selectedIndex = index;
   };
 
   timeIn.addEventListener('change', timeInChange);
