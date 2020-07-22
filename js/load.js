@@ -15,10 +15,10 @@
 
     xhr.addEventListener('load', function () {
       if (xhr.status === StatusCode.OK) {
-       onSuccess(xhr.response);
-     } else {
-       onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
-     }
+        onSuccess(xhr.response);
+      } else {
+        onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
+      }
     });
 
     xhr.addEventListener('error', function () {

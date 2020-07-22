@@ -3,15 +3,6 @@
 (function () {
   var QUANTITY_HOTEL = 8;
 
-  window.load(function () {
-    var fragment = document.createDocumentFragment();
-    for (var i = 0; i < QUANTITY_HOTEL; i++) {
-      fragment.appendChild(window.pin.getHousePin());
-    }
-  });
-
-
-
   var map = document.querySelector('.map');
   var formFilters = document.querySelector('.map__filters');
   var formFiltersSelects = formFilters.querySelectorAll('.map__filter');
@@ -41,7 +32,13 @@
         formNewHouseElement.disabled = false;
       });
 
-      mapPinsElement.appendChild(fragment);
+      window.load(function () {
+        var fragment = document.createDocumentFragment();
+        for (var i = 0; i < QUANTITY_HOTEL; i++) {
+          fragment.appendChild(window.pin.getHousePin());
+        }
+        mapPinsElement.appendChild(fragment);
+      });
     },
 
     getInactivePage: function () {
