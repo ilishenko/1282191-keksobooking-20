@@ -2,10 +2,15 @@
 
 (function () {
   var QUANTITY_HOTEL = 8;
-  var fragment = document.createDocumentFragment();
-  for (var i = 0; i < QUANTITY_HOTEL; i++) {
-    fragment.appendChild(window.pin.getHousePin());
-  }
+
+  window.load(function () {
+    var fragment = document.createDocumentFragment();
+    for (var i = 0; i < QUANTITY_HOTEL; i++) {
+      fragment.appendChild(window.pin.getHousePin());
+    }
+  });
+
+
 
   var map = document.querySelector('.map');
   var formFilters = document.querySelector('.map__filters');
