@@ -2,10 +2,6 @@
 
 (function () {
   var QUANTITY_HOTEL = 8;
-  var fragment = document.createDocumentFragment();
-  for (var i = 0; i < QUANTITY_HOTEL; i++) {
-    fragment.appendChild(window.pin.getHousePin());
-  }
 
   var map = document.querySelector('.map');
   var formFilters = document.querySelector('.map__filters');
@@ -19,6 +15,7 @@
   var formNewHouseInputTextes = formNewHouse.querySelectorAll('input[type="text"]');
   var formNewHouseTextarea = formNewHouse.querySelector('textarea');
   var mapPinsElementStart = mapPinsElement.querySelector('.map__pin--main');
+  var mapPinElement = mapPinsElement.children;
 
   window.maps = {
     getActivePage: function () {
@@ -36,7 +33,16 @@
         formNewHouseElement.disabled = false;
       });
 
-      mapPinsElement.appendChild(fragment);
+      if (mapPinElement.length <= 8) {
+        window.load(function () {
+          var fragment = document.createDocumentFragment();
+          for (var i = 0; i < QUANTITY_HOTEL; i++) {
+            fragment.appendChild(window.pin.getHousePin());
+          }
+          mapPinsElement.appendChild(fragment);
+        });
+      }
+
     },
 
     getInactivePage: function () {
