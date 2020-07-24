@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var QUANTITY_HOTEL = 8;
+  var QUANTITY_HOTEL = 5;
 
   var map = document.querySelector('.map');
   var formFilters = document.querySelector('.map__filters');
@@ -33,13 +33,14 @@
         formNewHouseElement.disabled = false;
       });
 
-      if (mapPinElement.length <= 8) {
+      if (mapPinElement.length <= 5) {
         window.load(function () {
           var fragment = document.createDocumentFragment();
           for (var i = 0; i < QUANTITY_HOTEL; i++) {
             fragment.appendChild(window.pin.getHousePin());
           }
           mapPinsElement.appendChild(fragment);
+          window.filter();
         });
       }
 
