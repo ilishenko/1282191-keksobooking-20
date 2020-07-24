@@ -35,7 +35,7 @@
       });
 
       if (mapPinElement.length <= 5) {
-        var filterForm = document.querySelector('.map__filters');
+        // var filterForm = document.querySelector('.map__filters');
 
         window.load(function () {
           var fragment = document.createDocumentFragment();
@@ -56,7 +56,7 @@
 
         window.filter(function () {
           var fragment = document.createDocumentFragment();
-          for (var i = 0; i < QUANTITY_HOTEL; i++) {
+          for (var j = 0; j < QUANTITY_HOTEL; j++) {
             fragment.appendChild(window.pin.getHousePin());
           }
           mapPinsElement.appendChild(fragment);
