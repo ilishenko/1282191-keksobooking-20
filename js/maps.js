@@ -48,8 +48,11 @@
 
       }
 
-      filterFormHousingType.addEventListener('chenge', function () {
-        mapPinElement.remove();
+      filterFormHousingType.addEventListener('change', function () {
+        for (var i = 2; i < mapPinElement.length; i++) {
+          mapPinElement[i].remove();
+        }
+
 
         window.filter(function () {
           var fragment = document.createDocumentFragment();
