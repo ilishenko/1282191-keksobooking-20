@@ -16,6 +16,7 @@
   var formNewHouseTextarea = formNewHouse.querySelector('textarea');
   var mapPinsElementStart = mapPinsElement.querySelector('.map__pin--main');
   var mapPinElement = mapPinsElement.children;
+  var filterFormHousingType = formFilters.querySelector('#housing-type');
 
   window.maps = {
     getActivePage: function () {
@@ -34,15 +35,31 @@
       });
 
       if (mapPinElement.length <= 5) {
+        var filterForm = document.querySelector('.map__filters');
+
         window.load(function () {
           var fragment = document.createDocumentFragment();
           for (var i = 0; i < QUANTITY_HOTEL; i++) {
             fragment.appendChild(window.pin.getHousePin());
           }
           mapPinsElement.appendChild(fragment);
-          window.filter();
+
         });
+
       }
+
+      filterFormHousingType.addEventListener('chenge', function () {
+        mapPinElement.remove();
+
+        window.filter(function () {
+          var fragment = document.createDocumentFragment();
+          for (var i = 0; i < QUANTITY_HOTEL; i++) {
+            fragment.appendChild(window.pin.getHousePin());
+          }
+          mapPinsElement.appendChild(fragment);
+
+        });
+      });
 
     },
 

@@ -4,7 +4,7 @@
   var filterForm = document.querySelector('.map__filters');
   var filterFormHousingType = filterForm.querySelector('#housing-type');
 
-  var filter = [];
+  var filterType = [];
 
   window.filter = function () {
 
@@ -13,6 +13,8 @@
     var typeHouse = filterType.filter(function (it) {
       return it.offer.type === filterFormHousingType.value;
     });
+
+    return typeHouse;
 
   };
 
