@@ -30,7 +30,7 @@
           'checkin': window.utils.getRandomElement(TIME_CHECK),
           'checkout': window.utils.getRandomElement(TIME_CHECK),
           'features': window.utils.getRandomElement(FEATURES),
-          'description': '',
+          'description': 'Великолепная квартира-студия',
           'photos': window.utils.getRandomElement(PHOTOS_HOTEL)
         },
 
