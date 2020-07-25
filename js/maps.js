@@ -35,12 +35,11 @@
       });
 
       if (mapPinElement.length <= 5) {
-        // var filterForm = document.querySelector('.map__filters');
 
-        window.load(function () {
+        window.load(function (data) {
           var fragment = document.createDocumentFragment();
           for (var i = 0; i < QUANTITY_HOTEL; i++) {
-            fragment.appendChild(window.pin.getHousePin());
+            fragment.appendChild(window.pin.getHousePin(data[i]));
           }
           mapPinsElement.appendChild(fragment);
 
@@ -49,34 +48,20 @@
       }
 
       filterFormHousingType.addEventListener('change', function () {
-        var mapPinsTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+        var deletePin = mapPinsElement.querySelectorAll('.map__pin:not(.map__pin--main)');
 
-        for (var i = 2; i < mapPinElement.length; i++) {
-          mapPinElement[i].remove();
+        for (var i = 0; i < deletePin.length; i++) {
+          deletePin[i].remove();
         }
 
         var filteredData = window.dataServer.filter(window.filterData);
-        console.log(filteredData[1]);
-
-        var getHousePin = function (data) {
-          var housePin = mapPinsTemplate.cloneNode(true);
-
-          housePin.querySelector('img').src = data.author.avatar;
-          housePin.style.left = data.location.x + 'px';
-          housePin.style.top = data.location.y + 'px';
-
-
-          return housePin;
-        };
 
         var fragment = document.createDocumentFragment();
-        for (var j = 0; j < QUANTITY_HOTEL; j++) {
-
-          fragment.appendChild(getHousePin(filteredData[j]));
+        for (var j = 0; j < filteredData.length; j++) {
+          fragment.appendChild(window.pin.getHousePin(filteredData[j]));
         }
         mapPinsElement.appendChild(fragment);
       });
-
     },
 
     getInactivePage: function () {
