@@ -49,19 +49,32 @@
       }
 
       filterFormHousingType.addEventListener('change', function () {
+        var mapPinsTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+
         for (var i = 2; i < mapPinElement.length; i++) {
           mapPinElement[i].remove();
         }
 
+        var filteredData = window.dataServer.filter(window.filterData);
+        console.log(filteredData);
 
-        window.filter(function () {
-          var fragment = document.createDocumentFragment();
-          for (var j = 0; j < QUANTITY_HOTEL; j++) {
-            fragment.appendChild(window.pin.getHousePin());
-          }
-          mapPinsElement.appendChild(fragment);
+        var fragment = document.createDocumentFragment();
+        for (var j = 0; j < QUANTITY_HOTEL; j++) {
 
-        });
+          var getHousePin = function () {
+            var housePin = mapPinsTemplate.cloneNode(true);
+
+            housePin.querySelector('img').src = filteredData[j].author.avatar;
+            housePin.style.left = filteredData[j].location.x + 'px';
+            housePin.style.top = filteredData[j].location.y + 'px';
+
+
+            return housePin;
+          };
+
+          fragment.appendChild(getHousePin());
+        }
+        mapPinsElement.appendChild(fragment);
       });
 
     },
