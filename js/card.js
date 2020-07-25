@@ -2,7 +2,8 @@
 (function () {
   var cardPopup = document.querySelector('#card').content.querySelector('.map__card.popup');
   var map = document.querySelector('.map');
-  var mapPins = document.querySelector('.ap__pins');
+  var mapPins = document.querySelector('.map__pins');
+  var mapFilter = map.querySelector('.map__filters-container');
 
   window.card = function () {
     var cardPopupList = cardPopup.cloneNode(true);
@@ -18,10 +19,11 @@
     cardPopupList.querySelector('.popup__features').textContent = window.data.getHouse().offer.features;
     cardPopupList.querySelector('.popup__description').textContent = window.data.getHouse().offer.description;
     cardPopupList.querySelector('.popup__photos').querySelector('.popup__photo').src = window.data.getHouse().offer.photos;
+    cardPopupList.querySelector('.popup__photos').appendChild(cardPopup.querySelector('.popup__photos').querySelector('.popup__photo')).src = window.data.getHouse().offer.photos;
 
     return cardPopupList;
   };
 
-  map.insertBefore(window.card(), mapPins);
+  map.insertBefore(window.card(), mapFilter);
 
 })();

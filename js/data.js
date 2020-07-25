@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var TYPE_HOUSE = ['palace', 'flat', 'house', 'bungalo'];
+  var TYPE_HOUSE = ['дворец', 'квартира', 'дом', 'бунгало'];
   var QUANTITY_ROOMS = ['1', '2', '3', '100'];
   var QUANTITY_GUESTS = ['1', '2', '3'];
   var TIME_CHECK = ['12:00', '13:00', '14:00'];

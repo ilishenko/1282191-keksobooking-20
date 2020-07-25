@@ -5,7 +5,7 @@
 
   window.utils = {
     getRandomNumber: function () {
-      var elementRandom = Math.floor(Math.random() * 1000);
+      var elementRandom = Math.floor(Math.random() * 10000);
       return elementRandom;
     },
 
