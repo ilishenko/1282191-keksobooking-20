@@ -56,23 +56,23 @@
         }
 
         var filteredData = window.dataServer.filter(window.filterData);
-        console.log(filteredData);
+        console.log(filteredData[1]);
+
+        var getHousePin = function (data) {
+          var housePin = mapPinsTemplate.cloneNode(true);
+
+          housePin.querySelector('img').src = data.author.avatar;
+          housePin.style.left = data.location.x + 'px';
+          housePin.style.top = data.location.y + 'px';
+
+
+          return housePin;
+        };
 
         var fragment = document.createDocumentFragment();
         for (var j = 0; j < QUANTITY_HOTEL; j++) {
 
-          var getHousePin = function () {
-            var housePin = mapPinsTemplate.cloneNode(true);
-
-            housePin.querySelector('img').src = filteredData[j].author.avatar;
-            housePin.style.left = filteredData[j].location.x + 'px';
-            housePin.style.top = filteredData[j].location.y + 'px';
-
-
-            return housePin;
-          };
-
-          fragment.appendChild(getHousePin());
+          fragment.appendChild(getHousePin(filteredData[j]));
         }
         mapPinsElement.appendChild(fragment);
       });
