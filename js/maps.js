@@ -55,9 +55,10 @@
         }
 
         var filteredData = window.dataServer.filter(window.filterData);
+        var result = (filteredData.length < QUANTITY_HOTEL) ? filteredData.length : QUANTITY_HOTEL;
 
         var fragment = document.createDocumentFragment();
-        for (var j = 0; j < filteredData.length; j++) {
+        for (var j = 0; j < result; j++) {
           fragment.appendChild(window.pin.getHousePin(filteredData[j]));
         }
         mapPinsElement.appendChild(fragment);
