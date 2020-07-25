@@ -15,6 +15,7 @@
 
     xhr.addEventListener('load', function () {
       if (xhr.status === StatusCode.OK) {
+        window.dataServer = xhr.response;
         onSuccess(xhr.response);
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
@@ -31,6 +32,7 @@
     xhr.timeout = TIMEOUT_IN_MS;
 
     xhr.send();
+
 
   };
 })();
