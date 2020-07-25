@@ -3,7 +3,7 @@
   var cardPopup = document.querySelector('#card').content.querySelector('.map__card popup');
 
   window.card = function () {
-    var cardPopupList = mapPinsTemplate.cloneNode(true);
+    var cardPopupList = cardPopup.cloneNode(true);
 
     cardPopupList.querySelector('.popup__avatar').src = window.data.getHouse.author.avatar;
     cardPopupList.querySelector('.popup__close').value = 'Закрыть';
@@ -18,6 +18,6 @@
     cardPopupList.querySelector('.popup__photos').querySelector('.popup__photo').src = window.data.getHouse.offer.photos;
 
     return cardPopupList;
-  }
+  };
   console.log(window.card());
 })();
