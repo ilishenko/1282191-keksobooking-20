@@ -37,6 +37,8 @@
       if (mapPinElement.length <= 5) {
 
         window.load(function (data) {
+
+          window.insertCard(data[0]);
           var fragment = document.createDocumentFragment();
           for (var i = 0; i < QUANTITY_HOTEL; i++) {
             fragment.appendChild(window.pin.getHousePin(data[i]));

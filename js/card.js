@@ -25,17 +25,16 @@
     }
 
     cardPopupList.querySelector('.popup__description').textContent = data.offer.description;
-    cardPopupList.querySelector('.popup__photos').querySelector('.popup__photo').src = data.offer.photos;
+    // cardPopupList.querySelector('.popup__photos').querySelector('.popup__photo').src = data.offer.photos;
     for (var j = 0; j < data.offer.photos.length; j++) {
-      cardPopupList.querySelector('.popup__photos').appendChild(cardPopup.querySelector('.popup__photos').querySelector('.popup__photo')).src = data.offer.photos[j];
+      cardPopupList.querySelector('.popup__photos').appendChild(cardPopupList.querySelector('.popup__photos').querySelector('.popup__photo')).src = data.offer.photos[j];
     }
 
     return cardPopupList;
   };
 
-  map.insertBefore(window.createCard(), mapFilter);
-
-  window.createCard(window.dataServer);
-
+  window.insertCard = function (data) {
+    return map.insertBefore(window.createCard(data), mapFilter);
+  };
 
 })();
