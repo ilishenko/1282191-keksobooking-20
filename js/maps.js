@@ -63,6 +63,7 @@
         }
         mapPinsElement.appendChild(fragment);
       });
+
     },
 
     getInactivePage: function () {
