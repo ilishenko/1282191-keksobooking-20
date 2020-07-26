@@ -11,6 +11,11 @@
       housePin.style.left = data.location.x + 'px';
       housePin.style.top = data.location.y + 'px';
 
+      housePin.addEventListener('click', function () {
+        window.insertCard(data);
+        window.getCardType(data);
+      });
+
       return housePin;
     }
 
