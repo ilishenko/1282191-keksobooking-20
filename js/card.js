@@ -62,21 +62,25 @@
 
   window.getCardType = function (data) {
     var cardPopupList = cardPopup.cloneNode(true);
+    var TYPE_HOUSE = {
+      'bungalo': 'Бунгало',
+      'house': 'Дом',
+      'flat': 'Квартира',
+      'palace': 'Дворец'
+    };
 
-    for (var k; k < data.offer.features.length; k++) {
       if (data.offer.features[k] === 'bungalo') {
-        cardPopupList.querySelector('.popup__type').textContent = 'Бунгало';
+        cardPopupList.querySelector('.popup__type').textContent = TYPE_HOUSE.bungalo;
       }
       if (data.offer.features[k] === 'house') {
-        cardPopupList.querySelector('.popup__type').textContent = 'Дом';
+        cardPopupList.querySelector('.popup__type').textContent = TYPE_HOUSE.house;
       }
       if (data.offer.features[k] === 'flat') {
-        cardPopupList.querySelector('.popup__type').textContent = 'Квартира';
+        cardPopupList.querySelector('.popup__type').textContent = TYPE_HOUSE.flat;
       }
       if (data.offer.features[k] === 'palace') {
-        cardPopupList.querySelector('.popup__type').textContent = 'Дворец';
+        cardPopupList.querySelector('.popup__type').textContent = TYPE_HOUSE.palace;
       }
-    }
   };
 
 })();
