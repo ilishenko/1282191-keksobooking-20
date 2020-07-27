@@ -13,7 +13,6 @@
 
       housePin.addEventListener('click', function () {
         window.insertCard(data);
-        window.getCardType(data);
       });
 
       return housePin;
