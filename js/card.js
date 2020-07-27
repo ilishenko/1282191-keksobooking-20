@@ -76,5 +76,11 @@
     map.insertBefore(window.createCard(data), mapFilter);
   };
 
+  window.getCardRemove = function () {
+    var cardPopupList = document.querySelector('.map__card.popup');
+    if (cardPopupList) {
+      map.removeChild(cardPopupList);
+    }
+  };
 
 })();

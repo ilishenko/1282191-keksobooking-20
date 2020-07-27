@@ -12,6 +12,7 @@
       housePin.style.top = data.location.y + 'px';
 
       housePin.addEventListener('click', function () {
+        window.getCardRemove();
         window.insertCard(data);
       });
 
