@@ -35,21 +35,17 @@
       });
 
       if (mapPinElement.length <= 5) {
-
         window.load(function (data) {
           var fragment = document.createDocumentFragment();
           for (var i = 0; i < QUANTITY_HOTEL; i++) {
             fragment.appendChild(window.pin.getHousePin(data[i]));
           }
           mapPinsElement.appendChild(fragment);
-
         });
-
       }
 
       filterFormHousingType.addEventListener('change', function () {
         var deletePin = mapPinsElement.querySelectorAll('.map__pin:not(.map__pin--main)');
-
         for (var i = 0; i < deletePin.length; i++) {
           deletePin[i].remove();
         }
@@ -63,6 +59,7 @@
         }
         mapPinsElement.appendChild(fragment);
       });
+
     },
 
     getInactivePage: function () {

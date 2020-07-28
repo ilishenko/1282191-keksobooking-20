@@ -20,6 +20,7 @@
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
       }
+
     });
 
     xhr.addEventListener('error', function () {
@@ -32,7 +33,6 @@
     xhr.timeout = TIMEOUT_IN_MS;
 
     xhr.send();
-
 
   };
 })();
