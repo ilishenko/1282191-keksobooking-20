@@ -11,28 +11,23 @@
     var price = true;
     var rooms = true;
 
+
+
     if (filterFormHousingType.value !== 'any') {
       type = item.offer.type === filterFormHousingType.value;
+
     } if (filterFormHousingPrice.value !== 'any') {
-      var getPrice = function () {
+
         if (filterFormHousingPrice.value === 'low') {
-          if (item.offer.price <= 10000) {
-            price = item.offer.price;
-          }
+            price = item.offer.price < 10000;
         }
         if (filterFormHousingPrice.value === 'middle') {
-          if (item.offer.price >= 10000 && item.offer.price <= 50000) {
-            price = item.offer.price;
-          }
-
+          price = item.offer.price >= 10000 && item.offer.price <= 50000;
         }
         if (filterFormHousingPrice.value === 'high') {
-          if (item.offer.price > 50000) {
-            price = item.offer.price;
-          }
+          price = item.offer.price > 50000;
         }
-      };
-      getPrice(item);
+
     } if (filterFormHousingRooms.value !== 'any') {
       rooms = item.offer.rooms === filterFormHousingRooms.value;
     }
