@@ -1,7 +1,7 @@
 'use strict';
-/*
+
 (function () {
-  var URL = '';
+  var URL = 'https://javascript.pages.academy/keksobooking';
 
   window.upload = function (data, onSuccess) {
     var xhr = new XMLHttpRequest();
@@ -15,4 +15,3 @@
     xhr.send(data);
   };
 })();
-*/

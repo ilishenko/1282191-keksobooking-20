@@ -11,7 +11,6 @@
   var formNewHouse = document.querySelector('.ad-form');
   var titleAd = formNewHouse.querySelector('#title');
   var mapPinsElementStart = mapPinsElement.querySelector('.map__pin--main');
-  // var formNewHouseDelete = formNewHouse.querySelector('.ad-form__reset');
 
   titleAd.addEventListener('invalid', function () {
     if (titleAd.validity.valueMissing) {

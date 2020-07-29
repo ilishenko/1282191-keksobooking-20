@@ -16,7 +16,7 @@
   var formNewHouseTextarea = formNewHouse.querySelector('textarea');
   var mapPinsElementStart = mapPinsElement.querySelector('.map__pin--main');
   var mapPinElement = mapPinsElement.children;
-  var filterFormHousingType = formFilters.querySelector('#housing-type');
+  //  var filterFormHousingType = formFilters.querySelector('#housing-type');
 
   window.maps = {
     getActivePage: function () {
@@ -44,7 +44,8 @@
         });
       }
 
-      filterFormHousingType.addEventListener('change', function () {
+      //  filterFormHousingType
+      formFilters.addEventListener('change', function () {
         var deletePin = mapPinsElement.querySelectorAll('.map__pin:not(.map__pin--main)');
         for (var i = 0; i < deletePin.length; i++) {
           deletePin[i].remove();
@@ -58,7 +59,7 @@
           fragment.appendChild(window.pin.getHousePin(filteredData[j]));
         }
         mapPinsElement.appendChild(fragment);
-      });
+      }, false);
 
     },
 
